@@ -28,6 +28,7 @@ app.post('/submit', function(req,res) {
         author: req.body.author,
         body: req.body.body
     });
+    res.send(200);
 });
 
 var server = app.listen(3000);
