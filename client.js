@@ -2,7 +2,7 @@ $(document).ready(function() {
     
     grabPosts();
 
-    $('#post').on('click', function() {
+    $('#post').click(function() {
         console.log("Submit called");
         console.log("Title: " + $('#title').val());
         console.log("author: " + $('#author').val());
@@ -13,6 +13,8 @@ $(document).ready(function() {
             body: $('#body').val()
         }, function (data){
             grabPosts();
+            $('#title').val('');
+            $('#body').val('');
         });
         
     });
@@ -21,7 +23,7 @@ $(document).ready(function() {
 function grabPosts(){
     $.get('posts',function(data) {
         console.log("Received Data: " + JSON.stringify(data));
-        
+
         $('#posts').empty();
 
         for (i=0;i<data.length;i++) {
@@ -33,9 +35,13 @@ function grabPosts(){
             var author = document.createTextNode(post.author);
             var body = document.createTextNode(post.body);
             var div = document.createElement('div');
+            var br = document.createElement('br');
+            var br2 = document.createElement('br');
 
             div.appendChild(h3);
             div.appendChild(author);
+            div.appendChild(br);
+            div.appendChild(br2);
             div.appendChild(body);
 
             $('#posts').prepend(div);
